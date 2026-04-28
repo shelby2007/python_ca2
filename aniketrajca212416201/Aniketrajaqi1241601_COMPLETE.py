@@ -1,7 +1,6 @@
 # Project: Air Quality Index (AQI) Analysis of India
-# Student: Aniket Raj | Reg No: 12416201
-# Course: INT375 - Data Science Toolbox: Python Programming
-# University: Lovely Professional University, Phagwara
+
+
 
 
 import pandas as pd
@@ -11,9 +10,7 @@ import seaborn as sns
 from scipy import stats
 
 
-# ============================================================
-# STEP 1 - Load the dataset
-# ============================================================
+
 
 df = pd.read_excel("AQI.xlsx")
 
@@ -25,21 +22,21 @@ print("\nData Types:")
 print(df.dtypes)
 
 
-# ============================================================
+
 # STEP 2 - Check Missing Values
-# ============================================================
+
 
 print("\nMissing values in each column:")
 print(df.isnull().sum())
 
-# Drop rows where pollutant values are missing
+
 df = df.dropna(subset=['pollutant_avg', 'pollutant_min', 'pollutant_max'])
 print("\nRows after removing missing values:", len(df))
 
 
-# ============================================================
-# STEP 3 - Summary Statistics
-# ============================================================
+
+#Summary Statistics
+
 
 print("\nSummary Statistics:")
 print(df[['pollutant_min', 'pollutant_avg', 'pollutant_max']].describe())
@@ -50,9 +47,9 @@ print("Std Dev:", round(df['pollutant_avg'].std(), 2))
 print("Skewness:", round(df['pollutant_avg'].skew(), 4))
 
 
-# ============================================================
+
 # OBJECTIVE 1 - Bar Chart: Average Pollutant Levels
-# ============================================================
+
 
 avg_by_pollutant = df.groupby('pollutant_id')['pollutant_avg'].mean().sort_values(ascending=False)
 
@@ -67,9 +64,9 @@ plt.close()
 print("Saved: graph1_avg_pollutant.png")
 
 
-# ============================================================
+
 # OBJECTIVE 2 - Histogram: Distribution of PM2.5
-# ============================================================
+
 
 pm25 = df[df['pollutant_id'] == 'PM2.5']['pollutant_avg']
 
@@ -87,9 +84,9 @@ plt.close()
 print("Saved: graph2_pm25_histogram.png")
 
 
-# ============================================================
+
 # OBJECTIVE 3 - Box Plot: Outlier Detection
-# ============================================================
+
 
 plt.figure(figsize=(9, 5))
 sns.boxplot(data=df, x='pollutant_id', y='pollutant_avg', palette='Set2')
@@ -109,9 +106,9 @@ outliers = df[(df['pollutant_avg'] < Q1 - 1.5 * IQR) | (df['pollutant_avg'] > Q3
 print(f"\nOutliers found using IQR method: {len(outliers)}")
 
 
-# ============================================================
+
 # OBJECTIVE 4 - Correlation Heatmap
-# ============================================================
+
 
 # Select only numeric columns for correlation
 numeric_cols = df[['pollutant_min', 'pollutant_avg', 'pollutant_max', 'latitude', 'longitude']]
@@ -129,9 +126,9 @@ plt.close()
 print("Saved: graph4_correlation_heatmap.png")
 
 
-# ============================================================
+
 # OBJECTIVE 5 - Top 10 Most Polluted States
-# ============================================================
+
 
 # Group by state and calculate mean pollutant_avg
 top_states = df.groupby('state')['pollutant_avg'].mean().sort_values(ascending=False).head(10)
@@ -152,7 +149,7 @@ print("Saved: graph5_top_polluted_states.png")
 
 # ============================================================
 # OBJECTIVE 6 - Hypothesis Testing (Independent t-test)
-# ============================================================
+
 
 # Filter PM2.5 and PM10 data
 pm25_data = df[df['pollutant_id'] == 'PM2.5']['pollutant_avg']
@@ -174,9 +171,9 @@ else:
     print("Decision: Fail to Reject H0 - No significant difference")
 
 
-# ============================================================
+
 # OBJECTIVE 7 - Linear Regression (Machine Learning)
-# ============================================================
+
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -220,7 +217,6 @@ plt.savefig('graph6_linear_regression.png', dpi=150)
 plt.close()
 print("Saved: graph6_linear_regression.png")
 
-print("\n========================================")
 print("All objectives completed successfully!")
 print("Graphs saved: graph1 to graph6")
-print("========================================")
+
