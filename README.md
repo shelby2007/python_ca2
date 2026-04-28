@@ -1,22 +1,15 @@
-# Data Science CA2 Project
+# AQI Data Analysis Project
 
-## 📌 Description
-This project is part of my Data Science coursework. It includes data analysis and visualization using Python.
+## Overview
+This project analyzes Air Quality Index (AQI) data using Python.
 
-## 🛠️ Tools Used
-- Python
-- Pandas
-- NumPy
-- Matplotlib
+## Tools Used
+Python, Pandas, Matplotlib
 
-## 📊 Features
-- Data cleaning
-- Data analysis
-- Visualization
+## Files
+- aqi_analysis.py → main code
+- AQI_Report.pdf → report
+- images/ → output screenshots
 
-## 📁 Files
-- main.py / notebook.ipynb
-- dataset file
-
-## 🚀 Author
+## Author
 Aniket Raj
